@@ -64,12 +64,14 @@ geojson_confidence = repo_url + '/master/jsons/S_Confidence.json'
 geojson_100yr = repo_url + '/master/jsons/S_FHAD_100yr.json'
 geojson_500yr = repo_url + '/master/jsons/S_FHAD_500yr.json'
 narrative1_url = repo_url + '/master/assets/narrative1.txt'
+narrative2_url = repo_url + '/master/assets/narrative2.txt'
 structures_shp = ('shp/S_Structure.shp')
 
 # Load Data 
 df_cg = pd.read_csv(custom_geometry_points)
 df_structures = pd.read_csv(structure_points)
 narrative1 = (requests.get(narrative1_url)).text
+narrative2 = (requests.get(narrative2_url)).text
 struct_df = gpd.read_file(structures_shp)
 
 # Define confidence interval steps for slider
@@ -528,7 +530,7 @@ app.layout = html.Div(children=[
             # structures narrative
             html.Div([
                 html.P(
-                    narrative1
+                    narrative2
                 )
             ], className="row", style={
             'background-color':'white', 

@@ -4,6 +4,7 @@
 /FR_TOT
 /jsons
 /R_SCORE
+/CONF
 geojson_factory.py
 imagescrapingtest.py
 initialColormapGenerator.py
