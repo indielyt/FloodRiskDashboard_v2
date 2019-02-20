@@ -8,16 +8,21 @@ import numpy as np
 import os
 
 
-arcpy.env.workspace = r'C:\Users\Daniel.Aragon\Desktop\dashboarddata_12212018\V1_DashboardStagingData.gdb'
-json_folder = r'C:\Users\Daniel.Aragon\Desktop\dashboarddata_12212018\FDP_TOT'
+# arcpy.env.workspace = r'C:\Users\Daniel.Aragon\Desktop\dashboarddata_12212018\V1_DashboardStagingData.gdb'
+# json_folder = r'C:\Users\Daniel.Aragon\Downloads\new_data\R_SCORE'
+# json_folder = r'C:\Users\Daniel.Aragon\Downloads\new_data\FR_TOT'
+# json_folder = r'C:\Users\Daniel.Aragon\Downloads\new_data\AEP_TOT'
+json_folder = r"C:\Users\Daniel.Aragon\Downloads\contours"
 
-dataset = 'S_Structure'
+
+# dataset = R'C:\Users\Daniel.Aragon\Downloads\new_data\shp\S_Structure.shp'
+dataset = r'W:\Risk MAP\2_0\Version2_RiskScoring_20190123\_data\RM_2_1_RiskAssessmentDB.gdb\CONF_CONTOURS_10'
 
 # field = 'R_SCORE'
 # field = 'FR_TOT'
 # field = 'AEP_TOT'
-# field = 'SV_TOT'
-field = 'FDP_TOT'
+# field = 'FDP_TOT'
+field = 'Contour'
 
 
 # develop intervals for binning
