@@ -1,6 +1,6 @@
 # RESOURCES
 # https://plot.ly/python/cmocean-colorscales/ (updated for python 3 and dash app)
-
+# Better source for generating color dictionaries  --  https://matplotlib.org/cmocean/
 # Script for developing the initial colormap from cmocean color scale
 
 import plotly.plotly as py
@@ -25,5 +25,5 @@ def cmocean_to_plotly(cmap, pl_entries):
     # return C
 
 # # Develop initial color map from matter colormap
-deep = cmocean_to_plotly(cmocean.cm.deep, 10)
+deep = cmocean_to_plotly(cmocean.cm.dense, 10)
 print (deep)

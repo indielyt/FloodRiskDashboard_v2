@@ -8,3 +8,4 @@
 geojson_factory.py
 imagescrapingtest.py
 initialColormapGenerator.py
+.vscode
