@@ -24,6 +24,7 @@ import requests
 import time
 
 import dash
+import dash_auth
 from dash.dependencies import Input, Output, State, Event
 import dash_core_components as dcc
 import dash_html_components as html
@@ -35,7 +36,10 @@ from urllib.parse import quote
 import urllib.request
 import urllib, os
 
-
+# Very light security step
+VALID_USERNAME_PASSWORD_PAIRS = [
+    ['michaelbaker', 'floodrisk']
+]
 
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css'] # from dash's tutorials
 # external_stylesheets = ['https://bootswatch.com/4/cerulean/bootstrap.css']
@@ -46,7 +50,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.config['suppress_callback_exceptions']=True
 
-app.title = 'Floodplain Risk'
+app.title = 'Flood Risk'
 
 # Set mapbox public access token
 mapbox_access_token = 'pk.eyJ1IjoiaW5kaWVseXQiLCJhIjoiY2pkcXZyMGZpMDB6NzJxbGw4aXdvb2w3bCJ9.sL_EzvrSj83Y0Hi1_6GT6A'
