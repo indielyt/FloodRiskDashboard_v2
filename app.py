@@ -46,7 +46,9 @@ VALID_USERNAME_PASSWORD_PAIRS = [
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/dZVMbK.css'] # update from 2017
 external_stylesheets = ['https://codepen.io/indielyt/pen/PVqKeq.css']
 
+# APP SETUP
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+auth = dash_auth.BasicAuth(app, VALID_USERNAME_PASSWORD_PAIRS)
 server = app.server
 app.config['suppress_callback_exceptions']=True
 
