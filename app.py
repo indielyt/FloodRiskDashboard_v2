@@ -571,6 +571,8 @@ app.layout = html.Div(children=[
                 'display': 'flex'
             }),
 
+            html.Hr(),
+            
             # structures narrative
             html.Div([
                 html.P(
