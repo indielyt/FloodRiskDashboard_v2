@@ -44,8 +44,9 @@ external_stylesheets = ['https://codepen.io/indielyt/pen/PVqKeq.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
-
 app.config['suppress_callback_exceptions']=True
+
+app.title = 'Floodplain Risk'
 
 # Set mapbox public access token
 mapbox_access_token = 'pk.eyJ1IjoiaW5kaWVseXQiLCJhIjoiY2pkcXZyMGZpMDB6NzJxbGw4aXdvb2w3bCJ9.sL_EzvrSj83Y0Hi1_6GT6A'
