@@ -751,7 +751,8 @@ def sum_user_weights(FRTOTval, AEPTOTval, FDPTOTval, dropdownvalue):
             message = f"Sum = {user_sum}%. Must equal 100 %"
         else:
             # message = f"Click submit to update map."   
-            message = 'Loading User Risk Weights' 
+            # message = 'Loading User Risk Weights' 
+            message = ''
 
         return message
 
@@ -982,13 +983,17 @@ def update_bar_chart(clickData, colorscale):
         Input('confidence-slider', 'value'), # confidence contour selection
         Input('colorscale-picker', 'colorscale'), # structures color picker
         Input('colorscale-picker2', 'colorscale'),  # heatmap color picker
-        Input('risk-map', 'clickData')], # click data from user selection
+        Input('risk-map', 'clickData'), # click data from user selection
+        Input('FRTOT-numericinput','n-submit'), Input('FRTOT-numericinput', 'n_blur'), # update user weights on enter, tab, or click elsewhere
+        Input('AEPTOT-numericinput','n-submit'), Input('AEPTOT-numericinput', 'n_blur'), # update user weights on enter, tab, or click elsewhere
+        Input('FDPTOT-numericinput','n-submit'), Input('FDPTOT-numericinput', 'n_blur')], # update user weights on enter, tab, or click elsewhere
 		[State('risk-map', 'relayoutData'), # state of zoom
         State('FRTOT-numericinput','value'), # state of user input
         State('AEPTOT-numericinput', 'value'), # state of user input
         State('FDPTOT-numericinput', 'value')]) # state of user input
 def display_map(radiovalue, deterministicvalues, values, checklist2values, dropdownvalue, 
-    value, colorscale, colorscale2, clickData, relayoutData, FRstate, AEPstate, FDPstate):
+    value, colorscale, colorscale2, clickData, FRns, FRblur, AEPns, AEPblur, FDPns, FDPblur, 
+    relayoutData, FRstate, AEPstate, FDPstate):
 
     # COLORS
     cm = dict(zip(BINS, colorscale)) # structures color dictionary
@@ -1116,27 +1121,30 @@ def display_map(radiovalue, deterministicvalues, values, checklist2values, dropd
 
         # CALCULATE GEOLAYER IF USER DEFINED WEIGHTS IS SELECTED
         if dropdownvalue=='USER':
-            struct_dff['USER'] = (struct_dff['FR_TOT']*(FRstate/100)) + \
-                (struct_dff['AEP_TOT']*(AEPstate/100)) + \
-                (struct_dff['FDP_TOT']*(FDPstate/100)) 
+            if FRstate + AEPstate + FDPstate == 100: # if user input ==100,  add to layers to map
+                struct_dff['USER'] = (struct_dff['FR_TOT']*(FRstate/100)) + \
+                    (struct_dff['AEP_TOT']*(AEPstate/100)) + \
+                    (struct_dff['FDP_TOT']*(FDPstate/100)) 
 
-            for bin in BINS:
-            # Calculate low and high for each bin interval (parsing bin name)
-                low = int(bin.split('-')[0])
-                high = int(bin.split('-')[1]) 
+                for bin in BINS:
+                # Calculate low and high for each bin interval (parsing bin name)
+                    low = int(bin.split('-')[0])
+                    high = int(bin.split('-')[1]) 
 
-                # query the structure dataframe for values in each bin range by user's dropdown value
-                bin_data = struct_dff[struct_dff[dropdownvalue].between(low,high,inclusive=False)]
-                bin_json = json.loads(bin_data.to_json())
+                    # query the structure dataframe for values in each bin range by user's dropdown value
+                    bin_data = struct_dff[struct_dff[dropdownvalue].between(low,high,inclusive=False)]
+                    bin_json = json.loads(bin_data.to_json())
 
-                geo_layer = dict(
-                        sourcetype = 'geojson',
-                        source = bin_json,
-                        type ='fill',
-                        color = cm[bin],
-                        opacity = 1
-                )
-                layout['mapbox']['layers'].append(geo_layer)
+                    geo_layer = dict(
+                            sourcetype = 'geojson',
+                            source = bin_json,
+                            type ='fill',
+                            color = cm[bin],
+                            opacity = 1
+                    )
+                    layout['mapbox']['layers'].append(geo_layer)
+            else:
+                pass # pass if user input does not equal 100
 
         # SERVE PREBUILT GEOLAYER IS NO USER DEFINED WEIGHTING
         else:
