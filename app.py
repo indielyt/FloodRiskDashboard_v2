@@ -55,10 +55,10 @@ app.config['suppress_callback_exceptions']=True
 app.title = 'Flood Risk'
 
 # Set mapbox public access token
-mapbox_access_token = 'pk.eyJ1IjoiaW5kaWVseXQiLCJhIjoiY2pkcXZyMGZpMDB6NzJxbGw4aXdvb2w3bCJ9.sL_EzvrSj83Y0Hi1_6GT6A'
+mapbox_access_token = 'pk.see_server'
 
 # Set google key
-key = "&key=" + "AIzaSyDbo5FlMFzns5OzeuW1TA7dOikvEuF-eYI" #key
+key = "&key=" + "see_server" #key
 
 # Data sources
 repo_url = 'https://raw.githubusercontent.com/indielyt/FloodRiskDashboard_v2'
